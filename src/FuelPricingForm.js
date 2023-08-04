@@ -11,7 +11,14 @@ const FuelPricingForm = () => {
   const { setTotalPriceOfAll } = useTotalPrice();
 
   const handleFuelChange = (event) => {
-    setSelectedFuel(event.target.value);
+    const selectedFuelType = event.target.value;
+    setSelectedFuel(selectedFuelType);
+    const selectedFuelObj = Fuels.find((fuel) => fuel.type === selectedFuelType);
+    if (selectedFuelObj) {
+      setPriceOfFuel(selectedFuelObj.price);
+    } else {
+      setPriceOfFuel(0);
+    }
   };
 
   const handleQuantityChange = (event) => {
